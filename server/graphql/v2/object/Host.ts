@@ -1626,12 +1626,16 @@ export const GraphQLHost = new GraphQLObjectType({
             );
 
           // Search Term
+          const textFields = ['name', 'description', 'longDescription'];
+          if (isAdmin) {
+            textFields.push('legalName');
+          }
           query = query.$if(
             args.searchTerm,
             buildKyselySearchConditions(args.searchTerm, {
               idFields: ['Collectives.id'],
               slugFields: ['slug'],
-              textFields: ['name', 'legalName', 'description', 'longDescription'],
+              textFields: textFields,
             }),
           );
 
