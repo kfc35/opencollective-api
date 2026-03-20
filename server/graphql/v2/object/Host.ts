@@ -1631,7 +1631,7 @@ export const GraphQLHost = new GraphQLObjectType({
             buildKyselySearchConditions(args.searchTerm, {
               idFields: ['Collectives.id'],
               slugFields: ['slug'],
-              textFields: ['name', 'description', 'longDescription'],
+              textFields: ['name', 'legalName', 'description', 'longDescription'],
             }),
           );
 
