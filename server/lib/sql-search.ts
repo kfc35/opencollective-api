@@ -722,7 +722,9 @@ export const buildKyselySearchConditions =
     const iLikeQuery = `%${sanitizeSearchTermForILike(strTerm)}%`;
     const allTextFields = [...(slugFields || []), ...(textFields || [])];
 
-    q = q.where(({ eb, or }) => or(allTextFields.map(field => eb(field, 'ilike', iLikeQuery))));
+    q = q.where(({ fn, eb, or }) =>
+      or(allTextFields.map(field => eb(fn<string>('unaccent', [field]), 'ilike', iLikeQuery))),
+    );
     return q;
   };
 
